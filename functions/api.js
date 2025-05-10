@@ -58,8 +58,8 @@ router.post("/bfhl", (req, res) => {
 });
 
 router.post("/bfhl/check", (req, res) => {
-  const data = req.body.data;
-  res.send({ received: data.toString() });
+  const { data } = req.query;
+  res.send({ received: data });
 });
 
 app.use("/.netlify/functions/api", router);
