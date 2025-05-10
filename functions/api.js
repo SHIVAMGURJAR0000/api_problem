@@ -57,6 +57,11 @@ router.post("/bfhl", (req, res) => {
   });
 });
 
+router.post("/bfhl/check", (req, res) => {
+  const data = req.body.data;
+  res.send({ received: data.toString() });
+});
+
 app.use("/.netlify/functions/api", router);
 
 module.exports = app;
