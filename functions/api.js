@@ -21,7 +21,26 @@ router.get("/bfhl", (req, res) => {
 });
 
 router.post("/bfhl", (req, res) => {
-  const data = req.body.data;
+  // const data = req.body.data;
+
+  let data;
+
+  try {
+    // First try from parsed body
+    data = req.body.data;
+
+    // Fallback to raw body if undefined
+    if (!data) {
+      const parsed = JSON.parse(req.rawBody || "{}");
+      data = parsed.data;
+    }
+  } catch (err) {
+    return res.status(400).json({
+      status: "error",
+      message: "Failed to parse body",
+    });
+  }
+
   if (!Array.isArray(data)) {
     return res
       .status(400)
