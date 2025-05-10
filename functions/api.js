@@ -3,7 +3,14 @@ const serverless = require("serverless-http");
 const app = express();
 const router = express.Router();
 
-app.use(express.json());
+// app.use(express.json());
+app.use(
+  express.json({
+    verify: (req, res, buf) => {
+      req.rawBody = buf.toString(); // Backup for fallback
+    },
+  })
+);
 
 const userId = "john_doe_17091999";
 const email = "john@xyz.com";
