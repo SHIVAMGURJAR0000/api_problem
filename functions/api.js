@@ -5,7 +5,9 @@ const app = express();
 
 app.use(express.json());
 app.get("/.netlify/functions/api/user", (req, res) => {
-  res.send("Hello from Express with ESM!");
+  res.json({
+    message: "hello",
+  });
 });
 
 app.post("/.netlify/functions/api/userArr", (req, res) => {
